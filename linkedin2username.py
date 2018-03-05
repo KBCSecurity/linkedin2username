@@ -19,6 +19,7 @@ if sys.version_info[0] >= 3:
 parser = argparse.ArgumentParser()
 parser.add_argument("username", type=str, help="A valid LinkedIn username.", action='store')
 parser.add_argument("company", type=str, help="Numerical company ID assigned by LinkedIn", action='store')
+parser.add_argument("domain", type=str, help="The E-Mail Domain to append to usernames.", action='store')
 parser.add_argument("-p", "--password", type=str, help="Optionally specific password on \
                      the command line. If not specified, will prompt and not display on screen.", action='store')
 parser.add_argument("-d", "--depth", type=int, help="Search depth. If unset, will try to grab them all.", action='store')
@@ -127,11 +128,14 @@ def remove_accents(string):
     if type(string) is not unicode:
         string = unicode(string, encoding='utf-8')
 
-    string = re.sub(u"[àáâãäå]", 'a', string)
+    string = re.sub(u"[àáâãå]", 'a', string)
+    string = re.sub(u"[ä]", 'ae', string)
     string = re.sub(u"[èéêë]", 'e', string)
     string = re.sub(u"[ìíîï]", 'i', string)
-    string = re.sub(u"[òóôõö]", 'o', string)
+    string = re.sub(u"[òóôõ]", 'o', string)
+    string = re.sub(u"[ö]", 'oe', string)
     string = re.sub(u"[ùúûü]", 'u', string)
+    string = re.sub(u"[ü]", 'ue', string)
     string = re.sub(u"[ýÿ]", 'y', string)
     string = re.sub(u"[ß]", 'b', string)
     return string
@@ -158,9 +162,9 @@ def write_files(list):
         try:
             rawnames.write(name + '\n')
             parse = name.split(' ')
-            flast.write(parse[0][0] + parse[-1] + '\n')
-            firstlast.write(parse[0] + '.' + parse[-1] + '\n')
-            firstl.write(parse[0] + parse[-1][0] + '\n')
+            flast.write(parse[0][0] + parse[-1] + '@' + args.domain + '\n')
+            firstlast.write(parse[0] + '.' + parse[-1] + '@' + args.domain + '\n')
+            firstl.write(parse[0] + parse[-1][0] + '@' + args.domain + '\n')
         except:
             continue
 
