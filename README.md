@@ -14,7 +14,7 @@ Here's what you get:
 # Example
 Here's an example to pull all employees of Uber:
 ```
-$ python linkedin2username.py myname@email.com 361843
+$ python linkedin2username.py myname@email.com 361843 uber.com
 ```
 
 Here's how to get that company ID (I will automate this later):
@@ -25,12 +25,13 @@ Here's how to get that company ID (I will automate this later):
 
 # Full Help
 ```
-usage: linkedin2username.py username company [-p PASSWORD] [-d DEPTH] [-s SLEEP]
+usage: linkedin2username.py username company domain [-p PASSWORD] [-d DEPTH] [-s SLEEP]
 
 positional arguments:
   username              A valid LinkedIn username.
   company               Numerical company ID assigned by LinkedIn
                         (search company employees and look at URL on website to find)
+  domain                The company domain to be appended to the final list
 
 optional arguments:
   -h, --help            show this help message and exit
