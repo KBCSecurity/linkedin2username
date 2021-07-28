@@ -1,3 +1,6 @@
+# Deprecated
+See gitlab
+
 # linkedin2username
 OSINT Tool: Generate username lists from companies on LinkedIn. Works with Python2.
 
